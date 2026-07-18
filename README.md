@@ -17,7 +17,7 @@
   非 OpenAI 官方产品。不修改 <code>.app</code> / <code>app.asar</code> / WindowsApps。
 </p>
 
-## 1.7 原生主题切换器
+## 1.8 原生主题切换器
 
 macOS 版现在包含一个可独立安装的原生主题工具：浏览真实缩略图、搜索和收藏主题、
 一键切换、可视化制作、导入/导出 `.dreamskin`，以及从提交哈希和 SHA-256 双重固定的
@@ -28,7 +28,7 @@ cd macos
 ./Install\ Theme\ Switcher.command
 ```
 
-项目随附 22 套内置主题，其中十六套是本项目制作的原创图像主题；社区页还可安装经过
+项目随附 26 套内置主题，其中二十套是本项目制作的原创图像主题；社区页还可安装经过
 来源与哈希审核的扩展主题。
 
 <p align="center">
@@ -58,6 +58,17 @@ cd macos
   <img src="macos/presets/preset-snow-ridge-temple/background.png" alt="雪岭古刹" width="290"><br>
   <sub>未来巨构：天穹环城 · 沧海天堤 · 沙海方舟　中国古建：长安云阙 · 宋园听雨 · 雪岭古刹</sub>
 </p>
+
+<p align="center">
+  <img src="macos/presets/preset-deep-space-command/background.png" alt="深空指挥台" width="440">
+  <img src="macos/presets/preset-jade-data-pavilion/background.png" alt="青玉数据阁" width="440"><br>
+  <img src="macos/presets/preset-scarlet-systems-bay/background.png" alt="赤白系统舱" width="440">
+  <img src="macos/presets/preset-paper-systems-lab/background.png" alt="纸上实验室" width="440"><br>
+  <sub>概念界面：深空指挥台 · 青玉数据阁 · 赤白系统舱 · 纸上实验室</sub>
+</p>
+
+概念界面主题把装饰仪表和信息面板限制在右侧背景；它们不是可点击控件，也不会替代
+Codex 原生侧栏、卡片、输入框和按钮。
 
 - macOS 工具、构建与使用说明：[`macos/README.md`](./macos/README.md)
 - 后续新增或发布主题：[`macos/community/README.md`](./macos/community/README.md)

@@ -27,15 +27,21 @@
 
 ## 原创图像预设
 
-本项目目前包含十六套原创图像主题。首批为 `preset-lunar-harbor/`、
+本项目目前包含二十套原创图像主题。首批为 `preset-lunar-harbor/`、
 `preset-paper-garden/`、`preset-solar-foundry/` 与 `preset-glass-coast/`；
 第二批为 `preset-orbit-library/`、`preset-porcelain-tide/`、
 `preset-verdant-atrium/`、`preset-ink-mountain/`、`preset-crystal-canyon/` 与
 `preset-cloud-workshop/`；第三批包含巨构组 `preset-celestial-ring-city/`、
 `preset-ocean-citadel/`、`preset-desert-ark/`，以及中国古建筑组
 `preset-changan-cloud-palace/`、`preset-song-rain-garden/`、
-`preset-snow-ridge-temple/`。它们统一采用 16:9 横图、左侧低信息区和右侧
-视觉焦点，覆盖深浅模式。生成工具、日期与素材清单记录在 `NOTICE.md`。
+`preset-snow-ridge-temple/`；第四批概念界面主题为
+`preset-deep-space-command/`、`preset-jade-data-pavilion/`、
+`preset-scarlet-systems-bay/` 与 `preset-paper-systems-lab/`。它们统一采用
+16:9 横图、左侧低信息区和右侧视觉焦点，覆盖深浅模式。生成工具、日期与
+素材清单记录在 `NOTICE.md`。
+
+概念界面主题可以在右侧表现仪表、抽象图表和控制台，但不能包含完整假窗口、可读
+文字、代码、光标，或让装饰按钮与 Codex 原生控件产生混淆。
 
 这些主题不由 `generate-presets.mjs` 管理，重新生成程序化抽象预设不会
 覆盖其 `background.png`。

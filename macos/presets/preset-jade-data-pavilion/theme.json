@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jade-data-pavilion",
+  "name": "青玉数据阁",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "青玉仪盘、黄铜刻度与黑漆控制台组成的数据陈列。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "MEASURE WITH PATIENCE",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#0b0e0d",
+    "panel": "#141a17",
+    "panelAlt": "#202b26",
+    "accent": "#6ba88a",
+    "accentAlt": "#91c7aa",
+    "secondary": "#c29a52",
+    "highlight": "#8f453b",
+    "text": "#f0f1e9",
+    "muted": "#9ba69d",
+    "line": "rgba(107, 168, 138, .26)"
+  }
+}

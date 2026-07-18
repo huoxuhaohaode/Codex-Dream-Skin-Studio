@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-deep-space-command",
+  "name": "深空指挥台",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "雷达、波形与玻璃仪表在深夜控制台上保持安静。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "KEEP THE SIGNAL CLEAR",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.85,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#05090d",
+    "panel": "#0e171f",
+    "panelAlt": "#162633",
+    "accent": "#58c5dc",
+    "accentAlt": "#86dbea",
+    "secondary": "#d8a552",
+    "highlight": "#347f9d",
+    "text": "#edf5f7",
+    "muted": "#8da0aa",
+    "line": "rgba(88, 197, 220, .27)"
+  }
+}

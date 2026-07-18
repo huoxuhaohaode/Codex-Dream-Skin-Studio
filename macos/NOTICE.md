@@ -39,6 +39,10 @@ recognizable people:
 - `presets/preset-changan-cloud-palace/background.png`
 - `presets/preset-song-rain-garden/background.png`
 - `presets/preset-snow-ridge-temple/background.png`
+- `presets/preset-deep-space-command/background.png`
+- `presets/preset-jade-data-pavilion/background.png`
+- `presets/preset-scarlet-systems-bay/background.png`
+- `presets/preset-paper-systems-lab/background.png`
 
 They are bundled as Dream Skin application/demo artwork. As with any generated
 asset, downstream distributors remain responsible for their own rights review.

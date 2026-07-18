@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-paper-systems-lab",
+  "name": "纸上实验室",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "纸张、描图片与黄铜滑杆拼成的触觉界面。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "THINK WITH YOUR HANDS",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#eeeae1",
+    "panel": "#faf8f3",
+    "panelAlt": "#e9ece7",
+    "accent": "#31537d",
+    "accentAlt": "#55779d",
+    "secondary": "#d8755f",
+    "highlight": "#6e8a74",
+    "text": "#303436",
+    "muted": "#737872",
+    "line": "rgba(49, 83, 125, .22)"
+  }
+}
