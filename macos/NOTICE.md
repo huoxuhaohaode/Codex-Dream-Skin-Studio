@@ -17,6 +17,32 @@ It does **not** grant rights to:
 
 `assets/portal-hero.png` is original abstract geometric art generated for this open-source repository (no characters). Replace it with your own image before shipping a branded theme to customers.
 
+The following original project assets were generated with OpenAI's built-in
+image generation tool on 2026-07-18 from prompts written specifically for this
+repository. They contain no imported third-party artwork, named characters, or
+recognizable people:
+
+- `theme-switcher/Assets/AppIcon-1024.png`
+- `presets/preset-lunar-harbor/background.png`
+- `presets/preset-paper-garden/background.png`
+- `presets/preset-solar-foundry/background.png`
+- `presets/preset-glass-coast/background.png`
+
+They are bundled as Dream Skin application/demo artwork. As with any generated
+asset, downstream distributors remain responsible for their own rights review.
+
+## Verified community catalog
+
+The application does not bundle community artwork. Its catalog may download a
+theme only from an immutable GitHub commit after separate SHA-256 checks for
+the theme configuration and image. The first entry, **世事宜梦境**, comes from
+`xnydl/codex-dream-skin` commit
+`8508629b3839682d6b51b299c8a1883b7b209eac`. That repository applies MIT to
+its software and states that this preset is deterministically generated
+abstract artwork with no photograph, person, or third-party IP. The original
+repository remains the authoritative source for its license and provenance.
+See `docs/community-theme-sources.md` for the review record and exclusions.
+
 ## Arina Hashimoto reference material
 
 The following user/maintainer-supplied files are excluded from the MIT software license:

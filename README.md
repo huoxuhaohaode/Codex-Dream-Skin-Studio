@@ -17,6 +17,32 @@
   非 OpenAI 官方产品。不修改 <code>.app</code> / <code>app.asar</code> / WindowsApps。
 </p>
 
+## 1.5 原生主题切换器
+
+macOS 版现在包含一个可独立安装的原生主题工具：浏览真实缩略图、搜索和收藏主题、
+一键切换、可视化制作、导入/导出 `.dreamskin`，以及从提交哈希和 SHA-256 双重固定的
+社区目录安装已审核主题。应用内帮助覆盖制作、分享、故障排查和安全边界。
+
+```bash
+cd macos
+./Install\ Theme\ Switcher.command
+```
+
+项目随附 10 套内置主题，其中四套是本项目制作的原创图像主题；社区页还可安装经过
+来源与哈希审核的扩展主题。
+
+<p align="center">
+  <img src="macos/presets/preset-lunar-harbor/background.png" alt="月港观星" width="440">
+  <img src="macos/presets/preset-paper-garden/background.png" alt="纸艺花园" width="440"><br>
+  <img src="macos/presets/preset-solar-foundry/background.png" alt="日光铸造" width="440">
+  <img src="macos/presets/preset-glass-coast/background.png" alt="雨后海岸" width="440"><br>
+  <sub>月港观星 · 纸艺花园 · 日光铸造 · 雨后海岸</sub>
+</p>
+
+- macOS 工具、构建与使用说明：[`macos/README.md`](./macos/README.md)
+- 后续新增或发布主题：[`macos/community/README.md`](./macos/community/README.md)
+- 内置主题制作规范：[`macos/presets/README.md`](./macos/presets/README.md)
+
 ## 赞助商
 
 <p align="center">
@@ -134,7 +160,7 @@ powershell -ExecutionPolicy Bypass -File .\windows\scripts\start-dream-skin.ps1
 
 | 平台 | 目录 | 入口 |
 |------|------|------|
-| Apple Silicon / Intel Mac | [`macos/`](./macos/) | 双击 `Install Codex Dream Skin.command` |
+| Apple Silicon / Intel Mac | [`macos/`](./macos/) | 双击 `Install Theme Switcher.command` |
 | Windows | [`windows/`](./windows/) | `scripts/install-dream-skin.ps1` → `start-dream-skin.ps1` |
 
 更细的说明：

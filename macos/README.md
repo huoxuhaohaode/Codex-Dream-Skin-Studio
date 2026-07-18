@@ -23,8 +23,11 @@ This project injects through **local loopback CDP**. It does **not** modify the 
 # 2) Install to the stable path and create Desktop launchers
 ./scripts/install-dream-skin-macos.sh --no-launch
 
-# 3) Switch to the tested featured preset, or import your own pure background
-~/.codex/codex-dream-skin-studio/scripts/switch-theme-macos.sh --id preset-romantic-rose
+# 3) Install the native visual theme switcher (requires Apple Command Line Tools)
+./Install\ Theme\ Switcher.command
+
+# Or switch from Terminal / import your own pure background
+# ~/.codex/codex-dream-skin-studio/scripts/switch-theme-macos.sh --id preset-romantic-rose
 # ~/.codex/codex-dream-skin-studio/scripts/customize-theme-macos.sh
 
 # 4) Start/re-apply, verify, or restore via Desktop:
@@ -38,6 +41,24 @@ This project injects through **local loopback CDP**. It does **not** modify the 
 # Look for 🎨 Skin in the top-right menu bar
 ```
 
+The native **Codex Dream Skin Switcher** is installed under `~/Applications`.
+It shows real theme thumbnails, color swatches, the active theme, and live
+injector status. Its visual theme maker includes image preview, light/dark mode,
+safe-area and task-page controls, focus sliders, and explicit accent colors.
+It can also import folders or `.dreamskin` files, export shareable theme packs,
+browse a hash-pinned verified community catalog, and filter themes by source.
+The Help menu documents switching, creation, imports, licensing, resource paths,
+troubleshooting, and the security boundary. A matching engine is embedded in the signed app
+bundle so the visual client and injector cannot drift between release versions.
+
+Build the distributable standalone app ZIP (the app embeds its matching engine):
+
+```bash
+./scripts/build-theme-switcher-release.sh
+```
+
+The archive and SHA-256 file are written under `release/`.
+
 Install location after step 2:
 
 | Item | Path |
@@ -45,6 +66,7 @@ Install location after step 2:
 | Engine | `~/.codex/codex-dream-skin-studio` |
 | State / logs / user images | `~/Library/Application Support/CodexDreamSkinStudio` |
 | Theme backup | under Application Support (`theme-backup.json`) |
+| Native switcher | `~/Applications/Codex Dream Skin Switcher.app` |
 
 ## Customer ZIP (optional packaging)
 
@@ -74,9 +96,9 @@ CDP is powerful and unauthenticated on loopback. Prefer Restore when you are don
 
 ## Bundled presets
 
-A fresh install seeds one tested featured preset plus five procedural abstract
-presets into your theme library. **桥本有菜 / Arina Hashimoto** is highlighted
-first here:
+A fresh install seeds ten presets into your theme library: one tested featured
+preset, five procedural abstract presets, and four original image themes.
+**桥本有菜 / Arina Hashimoto** is highlighted first here:
 
 ```bash
 ~/.codex/codex-dream-skin-studio/scripts/switch-theme-macos.sh --id preset-romantic-rose
@@ -102,12 +124,43 @@ directly, for example:
 ~/.codex/codex-dream-skin-studio/scripts/switch-theme-macos.sh --id preset-midnight-aurora
 ```
 
+Four additional original themes — **月港观星 / 纸艺花园 / 日光铸造 /
+雨后海岸** — use project-generated artwork with a quiet left content area and
+a right-side visual focus. Their source and generation notes are recorded in
+`NOTICE.md`.
+
 Seeding is idempotent and only manages `preset-*` packs — your own `custom-*`
 themes from “换一张图” are never touched. If no active theme exists yet, install
 starts from the neutral **Midnight Aurora** preset; it never overwrites an
 existing active theme.
 
 To contribute a preset, see [`presets/README.md`](./presets/README.md).
+
+## Theme packages and community imports
+
+The native app accepts either a folder containing `theme.json` plus its
+referenced image, or one portable `.dreamskin` file (`.codexskin` remains a
+supported legacy extension). A `.dreamskin` package follows the data-only
+package-v1 envelope: strict UTF-8 JSON, one base64 image, declared byte counts,
+media checks, and SHA-256. Import never runs third-party scripts or CSS. Every
+imported theme receives a local `custom-import-*` id, so it can be safely
+deleted. Local imports may be exported after the user reviews their rights;
+verified community imports must instead be shared from their recorded source.
+
+The Community view is intentionally curated rather than an unrestricted URL
+box. Each entry must use immutable raw GitHub URLs pinned to a 40-character
+commit and pass separate SHA-256 checks for its config and image. A software
+license does not automatically license bundled celebrity, anime, game, logo,
+or photography assets. The current review and exclusions are documented in
+[`docs/community-theme-sources.md`](./docs/community-theme-sources.md).
+
+CLI equivalents:
+
+```bash
+./scripts/import-theme-macos.sh --source "/path/to/theme-or-file.dreamskin" --no-apply
+./scripts/export-theme-macos.sh --id custom-example --output "$HOME/Desktop/example.dreamskin"
+./scripts/install-community-theme-macos.sh --id ssyai-dream --no-apply
+```
 
 ## Image guidelines
 

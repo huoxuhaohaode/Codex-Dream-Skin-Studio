@@ -80,6 +80,22 @@ cleanup_tests() {
 }
 trap cleanup_tests EXIT
 
+# The optional native switcher must compile into a valid, ad-hoc signed app.
+SWITCHER_TEST_APP="$TMP/Codex Dream Skin Switcher.app"
+"$ROOT/scripts/build-theme-switcher-macos.sh" "$SWITCHER_TEST_APP"
+/usr/bin/codesign --verify --strict "$SWITCHER_TEST_APP"
+[ -x "$SWITCHER_TEST_APP/Contents/MacOS/DreamSkinSwitcher" ]
+[ -x "$SWITCHER_TEST_APP/Contents/Resources/engine/scripts/switch-theme-macos.sh" ]
+[ -x "$SWITCHER_TEST_APP/Contents/Resources/engine/scripts/import-theme-macos.sh" ]
+[ -x "$SWITCHER_TEST_APP/Contents/Resources/engine/scripts/export-theme-macos.sh" ]
+[ -x "$SWITCHER_TEST_APP/Contents/Resources/engine/scripts/install-community-theme-macos.sh" ]
+[ -s "$SWITCHER_TEST_APP/Contents/Resources/engine/scripts/dreamskin-package.mjs" ]
+[ -s "$SWITCHER_TEST_APP/Contents/Resources/engine/community/catalog.json" ]
+[ -s "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.icns" ]
+[ -s "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.png" ]
+[ "$(/usr/bin/plutil -extract CFBundleIdentifier raw -o - "$SWITCHER_TEST_APP/Contents/Info.plist")" = \
+  "com.codexdreamskin.switcher" ]
+
 # Standalone archives flatten macos/ to their root. Prompt guides and NOTICE
 # must describe that layout and must not claim that Windows assets are bundled.
 STANDALONE_ROOT="$TMP/standalone-root"
@@ -212,6 +228,213 @@ fi
 ' "$SWITCH_STATE/theme/theme.json"
 [ -z "$(/usr/bin/find "$SWITCH_STATE" -maxdepth 1 -name '.theme-switch.*' -print -quit)" ]
 
+# The visual theme maker's script path must persist a reusable custom pack.
+# Its theme id and library directory must match so the saved card can switch.
+MAKER_HOME="$TMP/maker-home"
+MAKER_STATE="$MAKER_HOME/Library/Application Support/CodexDreamSkinStudio"
+/usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/load-image-theme-macos.sh" \
+    --file "$ROOT/assets/portal-hero.png" \
+    --name "中文自制主题" \
+    --tagline "可重复切换的主题" \
+    --appearance light \
+    --safe-area left \
+    --task-mode banner \
+    --focus-x 0.78 \
+    --focus-y 0.42 \
+    --accent '#447f70' \
+    --secondary '#dd6b55' \
+    --highlight '#d3a532' \
+    --no-apply >/dev/null
+MAKER_ID="$("$NODE" -e '
+  const fs = require("fs");
+  const theme = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+  if (theme.name !== "中文自制主题" || theme.tagline !== "可重复切换的主题") process.exit(1);
+  if (theme.appearance !== "light" || theme.art.safeArea !== "left") process.exit(1);
+  if (theme.art.taskMode !== "banner" || theme.art.focusX !== 0.78 || theme.art.focusY !== 0.42) process.exit(1);
+  if (theme.colors.accent !== "#447f70" || theme.colors.secondary !== "#dd6b55") process.exit(1);
+  process.stdout.write(theme.id);
+' "$MAKER_STATE/theme/theme.json")"
+[ -f "$MAKER_STATE/themes/$MAKER_ID/theme.json" ]
+[ -f "$MAKER_STATE/themes/$MAKER_ID/background.jpg" ]
+/usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/switch-theme-macos.sh" --id "$MAKER_ID" --no-apply >/dev/null
+if /usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/delete-theme-macos.sh" --id "$MAKER_ID" >/dev/null 2>&1; then
+  printf 'delete-theme removed the active custom theme.\n' >&2
+  exit 1
+fi
+/usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/load-image-theme-macos.sh" \
+    --file "$ROOT/assets/portal-hero.png" \
+    --name "第二套自制主题" \
+    --appearance dark \
+    --no-apply >/dev/null
+SECOND_MAKER_ID="$("$NODE" -e '
+  const value = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+  process.stdout.write(value.id);
+' "$MAKER_STATE/theme/theme.json")"
+[ "$SECOND_MAKER_ID" != "$MAKER_ID" ]
+/usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/delete-theme-macos.sh" --id "$MAKER_ID" >/dev/null
+[ ! -e "$MAKER_STATE/themes/$MAKER_ID" ]
+[ -f "$MAKER_STATE/images/portal-hero.png" ]
+if /usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/delete-theme-macos.sh" --id "$SECOND_MAKER_ID" >/dev/null 2>&1; then
+  printf 'delete-theme removed the second active custom theme.\n' >&2
+  exit 1
+fi
+
+# The current .dreamskin format is a strict data-only envelope. It can export
+# self-made and locally imported themes, rejects tampering, and remains subject
+# to the same sanitized library import and payload validation as folder imports.
+DREAMSKIN_FILE="$TMP/self-made-theme.dreamskin"
+/usr/bin/env HOME="$MAKER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/export-theme-macos.sh" --id "$SECOND_MAKER_ID" --output "$DREAMSKIN_FILE" >/dev/null
+[ -s "$DREAMSKIN_FILE" ]
+DREAMSKIN_INSPECT="$("$NODE" "$ROOT/scripts/dreamskin-package.mjs" inspect "$DREAMSKIN_FILE")"
+"$NODE" -e '
+  const value = JSON.parse(process.argv[1]);
+  if (!value.safeDataOnly || value.format !== "codex-dream-skin" || value.packageVersion !== 1) process.exit(1);
+  if (!/^[0-9a-f]{64}$/.test(value.packageSHA256) || value.imageBytes < 1) process.exit(1);
+' "$DREAMSKIN_INSPECT"
+DREAMSKIN_HOME="$TMP/dreamskin-home"
+DREAMSKIN_IMPORT="$(/usr/bin/env HOME="$DREAMSKIN_HOME" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$DREAMSKIN_FILE" --no-apply)"
+DREAMSKIN_ID="$("$NODE" -e '
+  const value = JSON.parse(process.argv[1]);
+  if (!/^custom-import-/.test(value.id)) process.exit(1);
+  process.stdout.write(value.id);
+' "$DREAMSKIN_IMPORT")"
+DREAMSKIN_DIR="$DREAMSKIN_HOME/Library/Application Support/CodexDreamSkinStudio/themes/$DREAMSKIN_ID"
+"$NODE" "$ROOT/scripts/injector.mjs" --check-payload --theme-dir "$DREAMSKIN_DIR" >/dev/null
+REPACKED_DREAMSKIN="$TMP/repacked.dreamskin"
+/usr/bin/env HOME="$DREAMSKIN_HOME" NODE="$NODE" \
+  "$ROOT/scripts/export-theme-macos.sh" --id "$DREAMSKIN_ID" --output "$REPACKED_DREAMSKIN" >/dev/null
+[ -s "$REPACKED_DREAMSKIN" ]
+"$NODE" "$ROOT/scripts/dreamskin-package.mjs" inspect "$REPACKED_DREAMSKIN" >/dev/null
+
+# A verified community source is intentionally different: its recorded source
+# link is the sharing path and repackaging is blocked in both UI and backend.
+"$NODE" -e '
+  const fs = require("fs");
+  const file = process.argv[1];
+  const value = JSON.parse(fs.readFileSync(file, "utf8"));
+  value.verified = true;
+  value.sourceURL = "https://github.com/example/theme/tree/0123456789012345678901234567890123456789/preset";
+  fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+' "$DREAMSKIN_DIR/origin.json"
+if /usr/bin/env HOME="$DREAMSKIN_HOME" NODE="$NODE" \
+  "$ROOT/scripts/export-theme-macos.sh" --id "$DREAMSKIN_ID" --output "$TMP/verified-repacked.dreamskin" >/dev/null 2>&1; then
+  printf 'Verified community theme was repackaged instead of preserving its source link.\n' >&2
+  exit 1
+fi
+DREAMSKIN_CORRUPT="$TMP/corrupt.dreamskin"
+"$NODE" -e '
+  const fs = require("fs");
+  const value = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+  value.primaryImage.sha256 = "0".repeat(64);
+  fs.writeFileSync(process.argv[2], JSON.stringify(value));
+' "$DREAMSKIN_FILE" "$DREAMSKIN_CORRUPT"
+if /usr/bin/env HOME="$TMP/dreamskin-corrupt-home" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$DREAMSKIN_CORRUPT" --no-apply >/dev/null 2>&1; then
+  printf 'Dreamskin importer accepted a tampered image hash.\n' >&2
+  exit 1
+fi
+
+# Portable imports must copy only data files, assign a deletable local id,
+# validate the complete payload, preserve provenance, and detect duplicate
+# packages without ever running or retaining third-party scripts.
+PACKAGE_HOME="$TMP/package-home"
+PACKAGE_STATE="$PACKAGE_HOME/Library/Application Support/CodexDreamSkinStudio"
+PACKAGE_SOURCE="$TMP/package-source"
+/bin/mkdir -p "$PACKAGE_SOURCE"
+/bin/cp "$ROOT/presets/preset-lunar-harbor/theme.json" "$PACKAGE_SOURCE/theme.json"
+/bin/cp "$ROOT/presets/preset-lunar-harbor/background.png" "$PACKAGE_SOURCE/background.png"
+PACKAGE_SCRIPT_MARKER="$TMP/import-script-ran"
+/usr/bin/printf '#!/bin/bash\ntouch "%s"\n' "$PACKAGE_SCRIPT_MARKER" > "$PACKAGE_SOURCE/untrusted.sh"
+/bin/chmod +x "$PACKAGE_SOURCE/untrusted.sh"
+PACKAGE_IMPORT="$(/usr/bin/env HOME="$PACKAGE_HOME" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$PACKAGE_SOURCE" --no-apply)"
+PACKAGE_ID="$("$NODE" -e '
+  const value = JSON.parse(process.argv[1]);
+  if (!/^custom-import-/.test(value.id) || value.alreadyInstalled !== false) process.exit(1);
+  process.stdout.write(value.id);
+' "$PACKAGE_IMPORT")"
+PACKAGE_DIR="$PACKAGE_STATE/themes/$PACKAGE_ID"
+[ -f "$PACKAGE_DIR/theme.json" ]
+[ -f "$PACKAGE_DIR/background.png" ]
+[ -f "$PACKAGE_DIR/origin.json" ]
+[ ! -e "$PACKAGE_DIR/untrusted.sh" ]
+[ ! -e "$PACKAGE_SCRIPT_MARKER" ]
+"$NODE" "$ROOT/scripts/injector.mjs" --check-payload --theme-dir "$PACKAGE_DIR" >/dev/null
+"$NODE" -e '
+  const origin = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+  if (origin.verified !== false || !/^[0-9a-f]{64}$/.test(origin.packageHash)) process.exit(1);
+' "$PACKAGE_DIR/origin.json"
+
+PACKAGE_FILE="$TMP/exported-theme.codexskin"
+/usr/bin/env HOME="$PACKAGE_HOME" NODE="$NODE" \
+  "$ROOT/scripts/export-theme-macos.sh" --id "$PACKAGE_ID" --output "$PACKAGE_FILE" >/dev/null
+[ -s "$PACKAGE_FILE" ]
+
+PACKAGE_RECEIVER_HOME="$TMP/package-receiver-home"
+PACKAGE_RECEIVER_STATE="$PACKAGE_RECEIVER_HOME/Library/Application Support/CodexDreamSkinStudio"
+PACKAGE_RECEIVE_ONE="$(/usr/bin/env HOME="$PACKAGE_RECEIVER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$PACKAGE_FILE" --no-apply)"
+PACKAGE_RECEIVE_TWO="$(/usr/bin/env HOME="$PACKAGE_RECEIVER_HOME" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$PACKAGE_FILE" --no-apply)"
+"$NODE" -e '
+  const one = JSON.parse(process.argv[1]);
+  const two = JSON.parse(process.argv[2]);
+  if (one.id !== two.id || one.alreadyInstalled !== false || two.alreadyInstalled !== true) process.exit(1);
+' "$PACKAGE_RECEIVE_ONE" "$PACKAGE_RECEIVE_TWO"
+[ "$(/usr/bin/find "$PACKAGE_RECEIVER_STATE/themes" -mindepth 1 -maxdepth 1 -type d | /usr/bin/wc -l | /usr/bin/tr -d ' ')" = "1" ]
+
+CORRUPT_PACKAGE="$TMP/corrupt-theme.codexskin"
+"$NODE" -e '
+  const fs = require("fs");
+  const value = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+  value.image.sha256 = "0".repeat(64);
+  fs.writeFileSync(process.argv[2], JSON.stringify(value));
+' "$PACKAGE_FILE" "$CORRUPT_PACKAGE"
+if /usr/bin/env HOME="$TMP/corrupt-package-home" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$CORRUPT_PACKAGE" --no-apply >/dev/null 2>&1; then
+  printf 'Theme package importer accepted a mismatched image hash.\n' >&2
+  exit 1
+fi
+
+SYMLINK_PACKAGE_SOURCE="$TMP/symlink-package-source"
+/bin/mkdir -p "$SYMLINK_PACKAGE_SOURCE"
+/bin/ln -s "$PACKAGE_SOURCE/theme.json" "$SYMLINK_PACKAGE_SOURCE/theme.json"
+/bin/ln -s "$PACKAGE_SOURCE/background.png" "$SYMLINK_PACKAGE_SOURCE/background.png"
+if /usr/bin/env HOME="$TMP/symlink-package-home" NODE="$NODE" \
+  "$ROOT/scripts/import-theme-macos.sh" --source "$SYMLINK_PACKAGE_SOURCE" --no-apply >/dev/null 2>&1; then
+  printf 'Theme package importer accepted symbolic-link source files.\n' >&2
+  exit 1
+fi
+
+# Catalog entries are immutable HTTPS resources with independent hashes. An
+# unknown id must fail before any download is attempted.
+"$NODE" -e '
+  const value = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+  if (value.schemaVersion !== 1 || !Array.isArray(value.themes) || value.themes.length < 1) process.exit(1);
+  for (const theme of value.themes) {
+    if (!theme.verified || !/^[0-9a-f]{40}$/.test(theme.commit)) process.exit(1);
+    if (!/^[0-9a-f]{64}$/.test(theme.themeSHA256) || !/^[0-9a-f]{64}$/.test(theme.imageSHA256)) process.exit(1);
+    for (const field of ["themeURL", "imageURL"]) {
+      const url = new URL(theme[field]);
+      if (url.protocol !== "https:" || url.hostname !== "raw.githubusercontent.com") process.exit(1);
+      if (!url.pathname.includes(`/${theme.commit}/`)) process.exit(1);
+    }
+  }
+' "$ROOT/community/catalog.json"
+if /usr/bin/env HOME="$TMP/community-unknown-home" NODE="$NODE" \
+  "$ROOT/scripts/install-community-theme-macos.sh" --id does-not-exist --no-apply >/dev/null 2>&1; then
+  printf 'Community importer accepted an unknown catalog id.\n' >&2
+  exit 1
+fi
+
 RUNTIME_HOME="$TMP/runtime-home"
 RUNTIME_STATE_ROOT="$RUNTIME_HOME/Library/Application Support/CodexDreamSkinStudio"
 RUNTIME_STATE="$RUNTIME_STATE_ROOT/state.json"
@@ -333,6 +556,18 @@ STATUS_JSON="$(/usr/bin/env HOME="$STATUS_HOME" "$ROOT/scripts/status-dream-skin
   const value = JSON.parse(process.argv[1]);
   if (value.session !== "stale" || value.injectorAlive !== false) process.exit(1);
 ' "$STATUS_JSON"
+
+# When an official ChatGPT/Codex main executable is running, status must not
+# rely on pgrep's truncated process name and incorrectly report it as closed.
+if /bin/ps -axo command= | /usr/bin/awk '
+  $1 ~ /\/(ChatGPT|Codex)\.app\/Contents\/MacOS\/(ChatGPT|Codex)$/ { found=1; exit }
+  END { exit(found ? 0 : 1) }
+'; then
+  "$NODE" -e '
+    const value = JSON.parse(process.argv[1]);
+    if (value.codexRunning !== true) process.exit(1);
+  ' "$STATUS_JSON"
+fi
 /bin/kill -TERM "$STATUS_PID" 2>/dev/null || true
 wait "$STATUS_PID" 2>/dev/null || true
 STATUS_PID=""
@@ -769,7 +1004,7 @@ CRLF_BACKUP="$TMP/config-crlf-backup.json"
 "$NODE" "$ROOT/scripts/theme-config.mjs" restore "$CRLF_CONFIG" "$CRLF_BACKUP" >/dev/null
 /usr/bin/cmp -s "$CRLF_CONFIG" "$TMP/original-crlf.toml"
 
-/usr/bin/env -u HOME /bin/bash -c '. "$1/scripts/common-macos.sh"; [ -n "$HOME" ] && [ "$SKIN_VERSION" = "1.2.0" ]' _ "$ROOT"
+/usr/bin/env -u HOME /bin/bash -c '. "$1/scripts/common-macos.sh"; [ -n "$HOME" ] && [ "$SKIN_VERSION" = "1.5.0" ]' _ "$ROOT"
 "$ROOT/scripts/doctor-macos.sh" >/dev/null
 
 printf 'PASS: syntax, payload, bundled presets, preset seeding, runtime-state safety, custom-theme, config round-trips, HOME recovery, signature, and doctor checks.\n'

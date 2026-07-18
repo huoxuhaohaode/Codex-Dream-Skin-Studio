@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-18",
+  "themes": [
+    {
+      "id": "ssyai-dream",
+      "name": "世事宜梦境",
+      "tagline": "粉紫星光落进工作台，写代码也有氛围感。",
+      "repository": "xnydl/codex-dream-skin",
+      "sourceURL": "https://github.com/xnydl/codex-dream-skin/tree/8508629b3839682d6b51b299c8a1883b7b209eac/macos/presets/preset-ssyai-dream",
+      "commit": "8508629b3839682d6b51b299c8a1883b7b209eac",
+      "license": "MIT",
+      "artworkLicense": "程序化生成的原创抽象背景；仓库声明无照片、人物或第三方 IP。",
+      "verified": true,
+      "themeURL": "https://raw.githubusercontent.com/xnydl/codex-dream-skin/8508629b3839682d6b51b299c8a1883b7b209eac/macos/presets/preset-ssyai-dream/theme.json",
+      "themeSHA256": "df3c2cd36f82dd0b8430b56f38bc211ba2f41902b5269023386f505c13885aaf",
+      "imageURL": "https://raw.githubusercontent.com/xnydl/codex-dream-skin/8508629b3839682d6b51b299c8a1883b7b209eac/macos/presets/preset-ssyai-dream/background.jpg",
+      "imageSHA256": "1c06328795cbb614a23d3ba10028b22a89016bfff178c1814c1bfe73ea296ef7"
+    }
+  ]
+}

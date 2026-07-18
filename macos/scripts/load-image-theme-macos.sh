@@ -8,6 +8,10 @@ set -euo pipefail
 
 IMAGE=""
 THEME_NAME=""
+TAGLINE=""
+ACCENT=""
+SECONDARY=""
+HIGHLIGHT=""
 FROM_LIBRARY=""
 APPLY_NOW="true"
 APPEARANCE="auto"
@@ -21,6 +25,10 @@ while [ "$#" -gt 0 ]; do
     --file) IMAGE="${2:-}"; shift 2 ;;
     --from-library) FROM_LIBRARY="${2:-}"; shift 2 ;;
     --name) THEME_NAME="${2:-}"; shift 2 ;;
+    --tagline) TAGLINE="${2:-}"; shift 2 ;;
+    --accent) ACCENT="${2:-}"; shift 2 ;;
+    --secondary) SECONDARY="${2:-}"; shift 2 ;;
+    --highlight) HIGHLIGHT="${2:-}"; shift 2 ;;
     --appearance) APPEARANCE="${2:-}"; shift 2 ;;
     --safe-area) SAFE_AREA="${2:-}"; shift 2 ;;
     --task-mode) TASK_MODE="${2:-}"; shift 2 ;;
@@ -66,8 +74,6 @@ if [ -z "$THEME_NAME" ]; then
 fi
 [ -n "$THEME_NAME" ] || THEME_NAME="我的主题"
 
-theme_id="img-$(/bin/date '+%Y%m%d%H%M%S')-$$"
-
 progress() {
   printf '%s\n' "$*" >&2
   notify_user "$*"
@@ -107,18 +113,27 @@ theme_args=(
   --output-dir "$THEME_DIR"
   --image "$image_name"
   --name "$THEME_NAME"
-  --tagline "Make something wonderful."
+  --tagline "${TAGLINE:-Make something wonderful.}"
   --quote "MAKE SOMETHING WONDERFUL"
   --appearance "$APPEARANCE"
   --safe-area "$SAFE_AREA"
   --task-mode "$TASK_MODE"
 )
+[ -n "$ACCENT" ] && theme_args+=(--accent "$ACCENT")
+[ -n "$SECONDARY" ] && theme_args+=(--secondary "$SECONDARY")
+[ -n "$HIGHLIGHT" ] && theme_args+=(--highlight "$HIGHLIGHT")
 [ -n "$FOCUS_X" ] && theme_args+=(--focus-x "$FOCUS_X")
 [ -n "$FOCUS_Y" ] && theme_args+=(--focus-y "$FOCUS_Y")
 "$NODE" "$SCRIPT_DIR/write-theme.mjs" "${theme_args[@]}" >/dev/null
 /usr/bin/find "$THEME_DIR" -maxdepth 1 -type f -name 'background.*' ! -name "$image_name" -delete
 trap - EXIT
 
+theme_id="$("$NODE" -e '
+  const fs = require("fs");
+  const theme = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+  if (!/^custom-[A-Za-z0-9_-]+$/.test(theme.id)) process.exit(1);
+  process.stdout.write(theme.id);
+' "$THEME_DIR/theme.json")" || fail "Could not read the saved custom theme id."
 lib_dir="$THEMES_ROOT/$theme_id"
 /bin/mkdir -p "$lib_dir"
 /bin/cp -f "$THEME_DIR/$image_name" "$THEME_DIR/theme.json" "$lib_dir/"

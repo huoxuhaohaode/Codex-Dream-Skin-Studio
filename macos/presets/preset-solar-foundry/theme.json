@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-solar-foundry",
+  "name": "日光铸造",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "黄铜、玻璃与落日，为专注留出安静空间。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "CRAFT WITH PRECISION",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.79,
+    "focusY": 0.51,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#171817",
+    "panel": "#232421",
+    "panelAlt": "#30302b",
+    "accent": "#e2b35f",
+    "accentAlt": "#f0ce89",
+    "secondary": "#77a59b",
+    "highlight": "#df6753",
+    "text": "#f4f1e9",
+    "muted": "#aaa59a",
+    "line": "rgba(226, 179, 95, .28)"
+  }
+}

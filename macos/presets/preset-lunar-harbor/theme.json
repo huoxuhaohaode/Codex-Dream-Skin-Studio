@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-lunar-harbor",
+  "name": "月港观星",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "月光、海面与安静的观测站。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "BUILD BEYOND THE HORIZON",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.82,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#09121a",
+    "panel": "#111d26",
+    "panelAlt": "#182934",
+    "accent": "#73c9c1",
+    "accentAlt": "#9bddd3",
+    "secondary": "#e8b56d",
+    "highlight": "#4ca6b4",
+    "text": "#edf5f5",
+    "muted": "#91a8b0",
+    "line": "rgba(115, 201, 193, .27)"
+  }
+}

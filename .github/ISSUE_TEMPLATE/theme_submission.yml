@@ -1,0 +1,54 @@
+name: 主题投稿 / Theme submission
+description: 提交原创主题，申请加入内置预设或已审核社区目录
+title: "[Theme]: "
+labels:
+  - theme
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先阅读 `macos/community/README.md`。不要上传 API Key、认证文件、私人聊天、含个人信息的截图或用户目录路径。
+  - type: dropdown
+    id: channel
+    attributes:
+      label: 收录方式
+      options:
+        - 内置预设 / Bundled preset
+        - 已审核社区目录 / Verified community catalog
+        - 尚未确定 / Not sure
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 固定来源链接
+      description: 社区主题请提供固定到 40 位提交哈希的 GitHub 链接；内置主题可填写计划中的 PR。
+      placeholder: https://github.com/owner/repo/tree/<40-char-commit>/path/to/theme
+    validations:
+      required: true
+  - type: textarea
+    id: artwork
+    attributes:
+      label: 图片来源与许可
+      description: 说明作者、生成方式、图片许可，以及你为何有权允许项目再分发。
+    validations:
+      required: true
+  - type: textarea
+    id: checksums
+    attributes:
+      label: 文件与 SHA-256
+      description: 列出 theme.json、背景图文件名及各自 SHA-256；内置预设可在 PR 中补充。
+      render: shell
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: 声明
+      options:
+        - label: 我拥有或已获得主题图片的再分发权，且已如实说明来源和许可。
+          required: true
+        - label: 主题不包含可执行脚本、CSS、真人肖像、未授权第三方角色或品牌素材。
+          required: true
+        - label: 我已移除密钥、认证文件、私人聊天、用户路径、定位和其他个人信息。
+          required: true
+        - label: 我已在本地运行主题校验；收录前会运行完整测试。
+          required: true

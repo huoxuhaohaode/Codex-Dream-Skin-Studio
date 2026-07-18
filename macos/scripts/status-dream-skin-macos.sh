@@ -70,9 +70,12 @@ injector_identity_matches() {
   [ -n "$actual_start" ] && [ "$actual_start" = "$expected_start" ]
 }
 
-# Codex process: cheap name match only.  26.707 renamed Codex.app to
-# ChatGPT.app, while older installs still expose the former process name.
-if /usr/bin/pgrep -x ChatGPT >/dev/null 2>&1 || /usr/bin/pgrep -x Codex >/dev/null 2>&1; then
+# Codex process: inspect the executable token rather than pgrep's short process
+# name, which can be truncated to "/Applications/Ch" on newer macOS builds.
+if /bin/ps -axo command= 2>/dev/null | /usr/bin/awk '
+  $1 ~ /\/(ChatGPT|Codex)\.app\/Contents\/MacOS\/(ChatGPT|Codex)$/ { found=1; exit }
+  END { exit(found ? 0 : 1) }
+'; then
   CODEX_RUNNING="true"
 fi
 

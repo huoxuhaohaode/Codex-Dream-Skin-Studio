@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-glass-coast",
+  "name": "雨后海岸",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "海雾、玻璃和雨声，让界面慢下来。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "CLEAR SPACE, CLEAR THOUGHT",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.81,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#dce4e1",
+    "panel": "#f4f7f5",
+    "panelAlt": "#e6eeea",
+    "accent": "#467f71",
+    "accentAlt": "#69a18f",
+    "secondary": "#d97861",
+    "highlight": "#305e59",
+    "text": "#23312e",
+    "muted": "#60736e",
+    "line": "rgba(70, 127, 113, .25)"
+  }
+}
