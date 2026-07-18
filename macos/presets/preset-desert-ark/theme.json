@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-desert-ark",
+  "name": "沙海方舟",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "暮色中的档案巨城，从沙海拔地而起。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "PRESERVE WHAT MATTERS",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#151423",
+    "panel": "#211d2a",
+    "panelAlt": "#312838",
+    "accent": "#39aab0",
+    "accentAlt": "#6dccd0",
+    "secondary": "#e1845f",
+    "highlight": "#bd5f68",
+    "text": "#f4ece9",
+    "muted": "#b4a0a0",
+    "line": "rgba(57, 170, 176, .26)"
+  }
+}

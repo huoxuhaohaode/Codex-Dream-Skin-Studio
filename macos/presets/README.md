@@ -27,12 +27,15 @@
 
 ## 原创图像预设
 
-本项目目前包含十套原创图像主题。首批为 `preset-lunar-harbor/`、
+本项目目前包含十六套原创图像主题。首批为 `preset-lunar-harbor/`、
 `preset-paper-garden/`、`preset-solar-foundry/` 与 `preset-glass-coast/`；
 第二批为 `preset-orbit-library/`、`preset-porcelain-tide/`、
 `preset-verdant-atrium/`、`preset-ink-mountain/`、`preset-crystal-canyon/` 与
-`preset-cloud-workshop/`。它们统一采用 16:9 横图、左侧低信息区和右侧视觉
-焦点，覆盖深浅模式各五套。生成工具、日期与素材清单记录在 `NOTICE.md`。
+`preset-cloud-workshop/`；第三批包含巨构组 `preset-celestial-ring-city/`、
+`preset-ocean-citadel/`、`preset-desert-ark/`，以及中国古建筑组
+`preset-changan-cloud-palace/`、`preset-song-rain-garden/`、
+`preset-snow-ridge-temple/`。它们统一采用 16:9 横图、左侧低信息区和右侧
+视觉焦点，覆盖深浅模式。生成工具、日期与素材清单记录在 `NOTICE.md`。
 
 这些主题不由 `generate-presets.mjs` 管理，重新生成程序化抽象预设不会
 覆盖其 `background.png`。

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-changan-cloud-palace",
+  "name": "长安云阙",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "云海托起重檐宫阙，灯火沿石阶缓缓上行。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "RISE ABOVE THE CLOUDS",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#0c1724",
+    "panel": "#142333",
+    "panelAlt": "#203549",
+    "accent": "#d79a58",
+    "accentAlt": "#efbc78",
+    "secondary": "#6d9eb7",
+    "highlight": "#b75e48",
+    "text": "#f5eee4",
+    "muted": "#9ca9b1",
+    "line": "rgba(215, 154, 88, .27)"
+  }
+}

@@ -33,6 +33,12 @@ recognizable people:
 - `presets/preset-ink-mountain/background.png`
 - `presets/preset-crystal-canyon/background.png`
 - `presets/preset-cloud-workshop/background.png`
+- `presets/preset-celestial-ring-city/background.png`
+- `presets/preset-ocean-citadel/background.png`
+- `presets/preset-desert-ark/background.png`
+- `presets/preset-changan-cloud-palace/background.png`
+- `presets/preset-song-rain-garden/background.png`
+- `presets/preset-snow-ridge-temple/background.png`
 
 They are bundled as Dream Skin application/demo artwork. As with any generated
 asset, downstream distributors remain responsible for their own rights review.

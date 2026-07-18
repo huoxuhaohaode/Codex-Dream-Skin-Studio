@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-celestial-ring-city",
+  "name": "天穹环城",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "月面尽头的环形巨城，安静延伸进星海。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "BUILD AT IMPOSSIBLE SCALE",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.87,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#05080d",
+    "panel": "#0f151d",
+    "panelAlt": "#18232e",
+    "accent": "#64c6d8",
+    "accentAlt": "#91e3eb",
+    "secondary": "#d0a35b",
+    "highlight": "#3c89ad",
+    "text": "#eef5f7",
+    "muted": "#8f9eaa",
+    "line": "rgba(100, 198, 216, .27)"
+  }
+}

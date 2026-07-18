@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-song-rain-garden",
+  "name": "宋园听雨",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "春雨落在瓦檐、月洞门与一池静水之间。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "LISTEN BEFORE YOU BUILD",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#e7e9e4",
+    "panel": "#f7f8f4",
+    "panelAlt": "#e3ebe5",
+    "accent": "#48755f",
+    "accentAlt": "#6f9b82",
+    "secondary": "#9c5e4b",
+    "highlight": "#52686a",
+    "text": "#29322f",
+    "muted": "#6f7974",
+    "line": "rgba(72, 117, 95, .23)"
+  }
+}

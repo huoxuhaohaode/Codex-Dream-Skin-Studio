@@ -96,8 +96,8 @@ CDP is powerful and unauthenticated on loopback. Prefer Restore when you are don
 
 ## Bundled presets
 
-A fresh install seeds sixteen presets into your theme library: one tested
-featured preset, five procedural abstract presets, and ten original image themes.
+A fresh install seeds twenty-two presets into your theme library: one tested
+featured preset, five procedural abstract presets, and sixteen original image themes.
 **桥本有菜 / Arina Hashimoto** is highlighted first here:
 
 ```bash
@@ -124,11 +124,14 @@ directly, for example:
 ~/.codex/codex-dream-skin-studio/scripts/switch-theme-macos.sh --id preset-midnight-aurora
 ```
 
-Ten additional original themes use project-generated artwork with a quiet left
+Sixteen additional original themes use project-generated artwork with a quiet left
 content area and a right-side visual focus. The first group is **月港观星 /
 纸艺花园 / 日光铸造 / 雨后海岸**. Version 1.6 adds **星环书库 / 瓷蓝潮汐 /
 雨林穹庭 / 水墨山庭 / 晶辉峡谷 / 云端工坊**, split evenly between light and
-dark appearances. Their source and generation notes are recorded in `NOTICE.md`.
+dark appearances. Version 1.7 adds the megastructure group **天穹环城 /
+沧海天堤 / 沙海方舟** and the original Chinese architecture group **长安云阙 /
+宋园听雨 / 雪岭古刹**. Their source and generation notes are recorded in
+`NOTICE.md`.
 
 Seeding is idempotent and only manages `preset-*` packs — your own `custom-*`
 themes from “换一张图” are never touched. If no active theme exists yet, install

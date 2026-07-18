@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-snow-ridge-temple",
+  "name": "雪岭古刹",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "雪后重檐迎来晨光，山雾在石阶下散开。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "BEGIN WITH STILLNESS",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#e8edf0",
+    "panel": "#f9fbfb",
+    "panelAlt": "#e3e9e9",
+    "accent": "#a64b3b",
+    "accentAlt": "#c9705b",
+    "secondary": "#58757a",
+    "highlight": "#c29352",
+    "text": "#2b3437",
+    "muted": "#6d7a7f",
+    "line": "rgba(166, 75, 59, .22)"
+  }
+}
