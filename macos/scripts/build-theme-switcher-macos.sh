@@ -16,6 +16,14 @@ SDK_PATH="${SDKROOT:-}"
 [ -f "$PLIST" ] || { printf 'Theme switcher Info.plist is missing: %s\n' "$PLIST" >&2; exit 1; }
 [ -f "$ICON_SOURCE" ] || { printf 'Theme switcher icon is missing: %s\n' "$ICON_SOURCE" >&2; exit 1; }
 
+icon_width="$(/usr/bin/sips -g pixelWidth "$ICON_SOURCE" 2>/dev/null | /usr/bin/awk '/pixelWidth:/ { print $2 }')"
+icon_height="$(/usr/bin/sips -g pixelHeight "$ICON_SOURCE" 2>/dev/null | /usr/bin/awk '/pixelHeight:/ { print $2 }')"
+icon_alpha="$(/usr/bin/sips -g hasAlpha "$ICON_SOURCE" 2>/dev/null | /usr/bin/awk '/hasAlpha:/ { print $2 }')"
+[ "$icon_width" = "1024" ] && [ "$icon_height" = "1024" ] \
+  || { printf 'Theme switcher icon must be exactly 1024 x 1024 pixels.\n' >&2; exit 1; }
+[ "$icon_alpha" = "yes" ] \
+  || { printf 'Theme switcher icon must contain an alpha channel.\n' >&2; exit 1; }
+
 if [ -z "$SDK_PATH" ]; then
   if [ -d "/Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk" ]; then
     SDK_PATH="/Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk"

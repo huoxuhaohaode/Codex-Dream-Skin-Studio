@@ -13,6 +13,7 @@ struct ThemeMetadata: Decodable, Hashable {
   let name: String
   let tagline: String?
   let image: String
+  let appearance: String?
   let colors: ThemeColors?
 }
 
@@ -527,6 +528,13 @@ struct ThemeCard: View {
             .font(.headline)
             .lineLimit(1)
           Spacer(minLength: 8)
+          if let appearance = theme.metadata.appearance,
+             appearance == "dark" || appearance == "light" {
+            Image(systemName: appearance == "dark" ? "moon.fill" : "sun.max.fill")
+              .font(.caption)
+              .foregroundStyle(.secondary)
+              .help(appearance == "dark" ? "深色外观" : "浅色外观")
+          }
           HStack(spacing: 5) {
             ColorSwatch(value: theme.metadata.colors?.accent)
             ColorSwatch(value: theme.metadata.colors?.secondary)
@@ -559,10 +567,10 @@ struct ThemeCard: View {
             .disabled(isBusy)
           } else {
             Button(action: apply) {
-              Label("应用主题", systemImage: "paintbrush.fill")
+              Label("应用主题", systemImage: "paintbrush")
                 .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.bordered)
             .disabled(isBusy)
           }
 
@@ -647,6 +655,34 @@ struct BrandIcon: View {
     }
     .frame(width: 42, height: 42)
     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+  }
+}
+
+struct SidebarActionButton: View {
+  let title: String
+  let systemImage: String
+  let action: () -> Void
+  @State private var isHovered = false
+
+  var body: some View {
+    Button(action: action) {
+      HStack(spacing: 9) {
+        Image(systemName: systemImage)
+          .frame(width: 16)
+          .foregroundStyle(.secondary)
+        Text(title)
+        Spacer()
+      }
+      .contentShape(Rectangle())
+      .padding(.horizontal, 8)
+      .frame(height: 30)
+      .background(
+        isHovered ? Color.primary.opacity(0.07) : Color.clear,
+        in: RoundedRectangle(cornerRadius: 6, style: .continuous)
+      )
+    }
+    .buttonStyle(.plain)
+    .onHover { isHovered = $0 }
   }
 }
 
@@ -1054,7 +1090,7 @@ struct HelpView: View {
         VStack(alignment: .leading, spacing: 2) {
           Text("Dream Skin 帮助")
             .font(.title2.weight(.semibold))
-          Text("版本 1.9.0")
+          Text("版本 1.9.1")
             .font(.caption)
             .foregroundStyle(.secondary)
         }
@@ -1141,7 +1177,7 @@ struct SidebarView: View {
   @Binding var showHelp: Bool
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 22) {
+    VStack(alignment: .leading, spacing: 20) {
       HStack(spacing: 10) {
         BrandIcon()
         VStack(alignment: .leading, spacing: 1) {
@@ -1177,41 +1213,48 @@ struct SidebarView: View {
       }
       .font(.subheadline)
       .padding(12)
-      .background(Color(nsColor: .controlBackgroundColor))
-      .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+      .background(
+        (store.sessionState == "运行中" ? Color.green : Color.secondary).opacity(0.08),
+        in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+      )
+      .overlay(
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+          .stroke(Color.primary.opacity(0.08), lineWidth: 1)
+      )
 
-      VStack(spacing: 8) {
+      VStack(alignment: .leading, spacing: 6) {
+        Text("添加主题")
+          .font(.caption.weight(.semibold))
+          .foregroundStyle(.secondary)
+
         Button(action: { showCreator = true }) {
           Label("制作主题", systemImage: "paintbrush.pointed.fill")
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.borderedProminent)
 
-        Button(action: { showCommunity = true }) {
-          Label("社区主题", systemImage: "globe.asia.australia.fill")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        Button(action: { showImporter = true }) {
-          Label("导入主题包", systemImage: "tray.and.arrow.down.fill")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
+        SidebarActionButton(
+          title: "社区主题",
+          systemImage: "globe.asia.australia",
+          action: { showCommunity = true }
+        )
+        SidebarActionButton(
+          title: "导入主题包",
+          systemImage: "tray.and.arrow.down",
+          action: { showImporter = true }
+        )
+      }
 
-        Button(action: store.reapply) {
-          Label("重新应用", systemImage: "arrow.clockwise")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        Button(action: store.openImagesFolder) {
-          Label("图片文件夹", systemImage: "folder")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        Button(action: store.pause) {
-          Label("暂停皮肤", systemImage: "pause.circle")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        Button(action: { showHelp = true }) {
-          Label("帮助", systemImage: "questionmark.circle")
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
+      VStack(alignment: .leading, spacing: 2) {
+        Text("工具")
+          .font(.caption.weight(.semibold))
+          .foregroundStyle(.secondary)
+          .padding(.bottom, 4)
+
+        SidebarActionButton(title: "重新应用", systemImage: "arrow.clockwise", action: store.reapply)
+        SidebarActionButton(title: "图片文件夹", systemImage: "folder", action: store.openImagesFolder)
+        SidebarActionButton(title: "暂停皮肤", systemImage: "pause.circle", action: store.pause)
+        SidebarActionButton(title: "帮助", systemImage: "questionmark.circle", action: { showHelp = true })
       }
       .disabled(store.isBusy)
 
@@ -1233,8 +1276,8 @@ struct SidebarView: View {
       }
     }
     .padding(20)
-    .frame(width: 230)
-    .background(Color(nsColor: .underPageBackgroundColor))
+    .frame(width: 220)
+    .background(.thinMaterial)
   }
 }
 
@@ -1328,7 +1371,7 @@ struct ThemeLibraryView: View {
           .disabled(store.isBusy)
         }
         .padding(.horizontal, 22)
-        .padding(.vertical, 18)
+        .padding(.vertical, 16)
 
         HStack(spacing: 12) {
           TextField("搜索主题", text: $searchText)
@@ -1401,7 +1444,7 @@ struct ThemeLibraryView: View {
       }
       .background(Color(nsColor: .windowBackgroundColor))
     }
-    .frame(minWidth: 850, minHeight: 590)
+    .frame(minWidth: 900, minHeight: 620)
     .sheet(isPresented: $showCreator) {
       ThemeCreatorView(store: store)
     }
@@ -1496,7 +1539,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   private var fallbackWindow: NSWindow?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
-    if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "png"),
+    if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
        let icon = NSImage(contentsOf: iconURL) {
       NSApp.applicationIconImage = icon
     }
@@ -1528,10 +1571,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     if fallbackWindow == nil {
       let controller = NSHostingController(rootView: ThemeLibraryView())
       let window = NSWindow(contentViewController: controller)
-      window.title = "Codex Dream Skin Switcher"
+      window.title = "Dream Skin 主题工作室"
       window.styleMask = [.titled, .closable, .miniaturizable, .resizable]
-      window.setContentSize(NSSize(width: 1050, height: 680))
-      window.minSize = NSSize(width: 850, height: 590)
+      window.setContentSize(NSSize(width: 1180, height: 760))
+      window.minSize = NSSize(width: 900, height: 620)
       window.isReleasedWhenClosed = false
       window.center()
       fallbackWindow = window
@@ -1545,11 +1588,12 @@ struct DreamSkinSwitcherApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
   var body: some Scene {
-    WindowGroup("Codex Dream Skin Switcher") {
+    WindowGroup("Dream Skin 主题工作室") {
       ThemeLibraryView()
     }
     .windowStyle(.titleBar)
     .windowToolbarStyle(.unified)
+    .defaultSize(width: 1180, height: 760)
     .commands {
       CommandGroup(replacing: .newItem) {
         Button("显示主窗口") {

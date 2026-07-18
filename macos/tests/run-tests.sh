@@ -93,8 +93,16 @@ SWITCHER_TEST_APP="$TMP/Codex Dream Skin Switcher.app"
 [ -s "$SWITCHER_TEST_APP/Contents/Resources/engine/community/catalog.json" ]
 [ -s "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.icns" ]
 [ -s "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.png" ]
+[ "$(/usr/bin/sips -g pixelWidth "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.png" 2>/dev/null \
+  | /usr/bin/awk '/pixelWidth:/ { print $2 }')" = "1024" ]
+[ "$(/usr/bin/sips -g pixelHeight "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.png" 2>/dev/null \
+  | /usr/bin/awk '/pixelHeight:/ { print $2 }')" = "1024" ]
+[ "$(/usr/bin/sips -g hasAlpha "$SWITCHER_TEST_APP/Contents/Resources/AppIcon.png" 2>/dev/null \
+  | /usr/bin/awk '/hasAlpha:/ { print $2 }')" = "yes" ]
 [ "$(/usr/bin/plutil -extract CFBundleIdentifier raw -o - "$SWITCHER_TEST_APP/Contents/Info.plist")" = \
   "com.codexdreamskin.switcher" ]
+[ "$(/usr/bin/plutil -extract CFBundleIconName raw -o - "$SWITCHER_TEST_APP/Contents/Info.plist")" = \
+  "AppIcon" ]
 
 # Standalone archives flatten macos/ to their root. Prompt guides and NOTICE
 # must describe that layout and must not claim that Windows assets are bundled.
@@ -1004,7 +1012,7 @@ CRLF_BACKUP="$TMP/config-crlf-backup.json"
 "$NODE" "$ROOT/scripts/theme-config.mjs" restore "$CRLF_CONFIG" "$CRLF_BACKUP" >/dev/null
 /usr/bin/cmp -s "$CRLF_CONFIG" "$TMP/original-crlf.toml"
 
-/usr/bin/env -u HOME /bin/bash -c '. "$1/scripts/common-macos.sh"; [ -n "$HOME" ] && [ "$SKIN_VERSION" = "1.9.0" ]' _ "$ROOT"
+/usr/bin/env -u HOME /bin/bash -c '. "$1/scripts/common-macos.sh"; [ -n "$HOME" ] && [ "$SKIN_VERSION" = "1.9.1" ]' _ "$ROOT"
 "$ROOT/scripts/doctor-macos.sh" >/dev/null
 
 printf 'PASS: syntax, payload, bundled presets, preset seeding, runtime-state safety, custom-theme, config round-trips, HOME recovery, signature, and doctor checks.\n'

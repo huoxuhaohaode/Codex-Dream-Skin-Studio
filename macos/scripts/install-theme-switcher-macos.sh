@@ -65,6 +65,12 @@ fi
 trap - EXIT
 /bin/rm -rf "$temporary"
 
+/usr/bin/touch "$DESTINATION"
+launch_services_register="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+if [ -x "$launch_services_register" ]; then
+  "$launch_services_register" -f "$DESTINATION" >/dev/null 2>&1 || true
+fi
+
 printf 'Installed %s\n' "$DESTINATION"
 if [ "$OPEN_AFTER_INSTALL" = "true" ]; then
   /usr/bin/open -n "$DESTINATION"
