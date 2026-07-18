@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-mist-spring-garden",
+  "name": "雾泉石庭",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "温泉水汽与浅色矿石，给工作台一口清晨空气。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "CLEAR THE MIND",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#e6eef1",
+    "panel": "#f8fbfb",
+    "panelAlt": "#e4eeee",
+    "accent": "#3f8fa3",
+    "accentAlt": "#67afbd",
+    "secondary": "#647780",
+    "highlight": "#c6a06b",
+    "text": "#28383d",
+    "muted": "#6c7e83",
+    "line": "rgba(63, 143, 163, .22)"
+  }
+}

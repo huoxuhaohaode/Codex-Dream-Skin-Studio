@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-citrus-atelier",
+  "name": "柑橘工坊",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "柑橘、绿玻璃与蓝色织物，带来清爽明快的工作感。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "KEEP IDEAS FRESH",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#f1efeb",
+    "panel": "#fffdf8",
+    "panelAlt": "#eef3e9",
+    "accent": "#e08022",
+    "accentAlt": "#f1a447",
+    "secondary": "#497f55",
+    "highlight": "#315a91",
+    "text": "#303731",
+    "muted": "#747b74",
+    "line": "rgba(224, 128, 34, .22)"
+  }
+}

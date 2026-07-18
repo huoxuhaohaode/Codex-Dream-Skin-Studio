@@ -17,7 +17,7 @@
   非 OpenAI 官方产品。不修改 <code>.app</code> / <code>app.asar</code> / WindowsApps。
 </p>
 
-## 1.8 原生主题切换器
+## 1.9 原生主题切换器
 
 macOS 版现在包含一个可独立安装的原生主题工具：浏览真实缩略图、搜索和收藏主题、
 一键切换、可视化制作、导入/导出 `.dreamskin`，以及从提交哈希和 SHA-256 双重固定的
@@ -28,7 +28,7 @@ cd macos
 ./Install\ Theme\ Switcher.command
 ```
 
-项目随附 26 套内置主题，其中二十套是本项目制作的原创图像主题；社区页还可安装经过
+项目随附 32 套内置主题，其中二十六套是本项目制作的原创图像主题；社区页还可安装经过
 来源与哈希审核的扩展主题。
 
 <p align="center">
@@ -66,6 +66,19 @@ cd macos
   <img src="macos/presets/preset-paper-systems-lab/background.png" alt="纸上实验室" width="440"><br>
   <sub>概念界面：深空指挥台 · 青玉数据阁 · 赤白系统舱 · 纸上实验室</sub>
 </p>
+
+<p align="center">
+  <img src="macos/presets/preset-aurora-silk/background.png" alt="极光绸幕" width="290">
+  <img src="macos/presets/preset-resonance-hall/background.png" alt="声波穹厅" width="290">
+  <img src="macos/presets/preset-obsidian-tea-court/background.png" alt="黑曜茶庭" width="290"><br>
+  <img src="macos/presets/preset-mist-spring-garden/background.png" alt="雾泉石庭" width="290">
+  <img src="macos/presets/preset-citrus-atelier/background.png" alt="柑橘工坊" width="290">
+  <img src="macos/presets/preset-prism-rain/background.png" alt="棱镜晴雨" width="290"><br>
+  <sub>感官体验：极光绸幕 · 声波穹厅 · 黑曜茶庭 · 雾泉石庭 · 柑橘工坊 · 棱镜晴雨</sub>
+</p>
+
+感官体验主题从光、声音、气味、温度与材质联想出发，三套深色与三套浅色保持低刺激、
+高辨识度和稳定的左侧阅读区，适合长时间工作。
 
 概念界面主题把装饰仪表和信息面板限制在右侧背景；它们不是可点击控件，也不会替代
 Codex 原生侧栏、卡片、输入框和按钮。

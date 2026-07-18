@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-obsidian-tea-court",
+  "name": "黑曜茶庭",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "茶雾、青瓷与黑石水庭，让节奏慢下来。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "SLOW DOWN TO SEE MORE",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#0b0d0c",
+    "panel": "#151917",
+    "panelAlt": "#202821",
+    "accent": "#7fa58a",
+    "accentAlt": "#a8c5ad",
+    "secondary": "#c17b4d",
+    "highlight": "#556f65",
+    "text": "#eef1eb",
+    "muted": "#9ca49e",
+    "line": "rgba(127, 165, 138, .25)"
+  }
+}

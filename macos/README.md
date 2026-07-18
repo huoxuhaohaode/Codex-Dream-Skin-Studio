@@ -96,8 +96,8 @@ CDP is powerful and unauthenticated on loopback. Prefer Restore when you are don
 
 ## Bundled presets
 
-A fresh install seeds twenty-six presets into your theme library: one tested
-featured preset, five procedural abstract presets, and twenty original image themes.
+A fresh install seeds thirty-two presets into your theme library: one tested
+featured preset, five procedural abstract presets, and twenty-six original image themes.
 **桥本有菜 / Arina Hashimoto** is highlighted first here:
 
 ```bash
@@ -137,6 +137,12 @@ Version 1.8 adds four concept-interface backgrounds: **深空指挥台 / 青玉�
 赤白系统舱 / 纸上实验室**. Their decorative instruments, charts, and control
 surfaces stay on the right side and contain no readable labels. They are artwork,
 not clickable controls; all real interaction remains in the native Codex UI.
+
+Version 1.9 adds six sensory-experience backgrounds, split evenly between dark
+and light appearances: **极光绸幕 / 声波穹厅 / 黑曜茶庭 / 雾泉石庭 /
+柑橘工坊 / 棱镜晴雨**. Light, acoustics, tea steam, warm mineral water, citrus,
+and rain-washed glass give each theme a distinct mood while preserving a calm
+left-side reading area for long sessions.
 
 Seeding is idempotent and only manages `preset-*` packs — your own `custom-*`
 themes from “换一张图” are never touched. If no active theme exists yet, install
