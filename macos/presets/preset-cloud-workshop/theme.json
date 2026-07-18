@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-cloud-workshop",
+  "name": "云端工坊",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "云海之上的玻璃、黄铜与轻盈机械。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "MAKE ROOM TO BUILD",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.85,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#dcecf4",
+    "panel": "#f8fbfc",
+    "panelAlt": "#e7f1f1",
+    "accent": "#3b8196",
+    "accentAlt": "#63aabc",
+    "secondary": "#c88f52",
+    "highlight": "#d96f65",
+    "text": "#26383d",
+    "muted": "#65797e",
+    "line": "rgba(59, 129, 150, .23)"
+  }
+}

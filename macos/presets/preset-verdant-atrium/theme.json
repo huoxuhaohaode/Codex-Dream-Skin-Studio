@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-verdant-atrium",
+  "name": "雨林穹庭",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "雨夜温室在水面与微光之间缓慢生长。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "GROW QUIETLY",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.83,
+    "focusY": 0.49,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#07110f",
+    "panel": "#10201b",
+    "panelAlt": "#173228",
+    "accent": "#46c8ad",
+    "accentAlt": "#78dfc6",
+    "secondary": "#e1ab5c",
+    "highlight": "#238e7a",
+    "text": "#eaf5f0",
+    "muted": "#8ca79d",
+    "line": "rgba(70, 200, 173, .26)"
+  }
+}

@@ -27,6 +27,12 @@ recognizable people:
 - `presets/preset-paper-garden/background.png`
 - `presets/preset-solar-foundry/background.png`
 - `presets/preset-glass-coast/background.png`
+- `presets/preset-orbit-library/background.png`
+- `presets/preset-porcelain-tide/background.png`
+- `presets/preset-verdant-atrium/background.png`
+- `presets/preset-ink-mountain/background.png`
+- `presets/preset-crystal-canyon/background.png`
+- `presets/preset-cloud-workshop/background.png`
 
 They are bundled as Dream Skin application/demo artwork. As with any generated
 asset, downstream distributors remain responsible for their own rights review.

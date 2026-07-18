@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-crystal-canyon",
+  "name": "晶辉峡谷",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "矿石微光穿过玄武岩峡谷，照亮深夜工作台。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "FIND THE HIDDEN SIGNAL",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.85,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#090b12",
+    "panel": "#141824",
+    "panelAlt": "#20283a",
+    "accent": "#6bcbd1",
+    "accentAlt": "#94e1db",
+    "secondary": "#d98ba6",
+    "highlight": "#8b75b6",
+    "text": "#f2eef5",
+    "muted": "#9da3b4",
+    "line": "rgba(107, 203, 209, .27)"
+  }
+}

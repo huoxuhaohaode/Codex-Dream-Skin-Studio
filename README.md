@@ -17,7 +17,7 @@
   非 OpenAI 官方产品。不修改 <code>.app</code> / <code>app.asar</code> / WindowsApps。
 </p>
 
-## 1.5 原生主题切换器
+## 1.6 原生主题切换器
 
 macOS 版现在包含一个可独立安装的原生主题工具：浏览真实缩略图、搜索和收藏主题、
 一键切换、可视化制作、导入/导出 `.dreamskin`，以及从提交哈希和 SHA-256 双重固定的
@@ -28,7 +28,7 @@ cd macos
 ./Install\ Theme\ Switcher.command
 ```
 
-项目随附 10 套内置主题，其中四套是本项目制作的原创图像主题；社区页还可安装经过
+项目随附 16 套内置主题，其中十套是本项目制作的原创图像主题；社区页还可安装经过
 来源与哈希审核的扩展主题。
 
 <p align="center">
@@ -37,6 +37,16 @@ cd macos
   <img src="macos/presets/preset-solar-foundry/background.png" alt="日光铸造" width="440">
   <img src="macos/presets/preset-glass-coast/background.png" alt="雨后海岸" width="440"><br>
   <sub>月港观星 · 纸艺花园 · 日光铸造 · 雨后海岸</sub>
+</p>
+
+<p align="center">
+  <img src="macos/presets/preset-orbit-library/background.png" alt="星环书库" width="290">
+  <img src="macos/presets/preset-porcelain-tide/background.png" alt="瓷蓝潮汐" width="290">
+  <img src="macos/presets/preset-verdant-atrium/background.png" alt="雨林穹庭" width="290"><br>
+  <img src="macos/presets/preset-ink-mountain/background.png" alt="水墨山庭" width="290">
+  <img src="macos/presets/preset-crystal-canyon/background.png" alt="晶辉峡谷" width="290">
+  <img src="macos/presets/preset-cloud-workshop/background.png" alt="云端工坊" width="290"><br>
+  <sub>星环书库 · 瓷蓝潮汐 · 雨林穹庭 · 水墨山庭 · 晶辉峡谷 · 云端工坊</sub>
 </p>
 
 - macOS 工具、构建与使用说明：[`macos/README.md`](./macos/README.md)

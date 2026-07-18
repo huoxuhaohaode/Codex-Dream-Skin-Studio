@@ -1054,7 +1054,7 @@ struct HelpView: View {
         VStack(alignment: .leading, spacing: 2) {
           Text("Dream Skin 帮助")
             .font(.title2.weight(.semibold))
-          Text("版本 1.5.0")
+          Text("版本 1.6.0")
             .font(.caption)
             .foregroundStyle(.secondary)
         }

@@ -27,12 +27,14 @@
 
 ## 原创图像预设
 
-`preset-lunar-harbor/`、`preset-paper-garden/`、`preset-solar-foundry/` 与
-`preset-glass-coast/` 是为本项目生成的四套原创图像主题。它们统一采用
-16:9 横图、左侧低信息区和右侧视觉焦点，并分别覆盖深色夜景、明亮纸艺、
-暖色建筑与清冷自然四种方向。生成工具、日期与素材清单记录在 `NOTICE.md`。
+本项目目前包含十套原创图像主题。首批为 `preset-lunar-harbor/`、
+`preset-paper-garden/`、`preset-solar-foundry/` 与 `preset-glass-coast/`；
+第二批为 `preset-orbit-library/`、`preset-porcelain-tide/`、
+`preset-verdant-atrium/`、`preset-ink-mountain/`、`preset-crystal-canyon/` 与
+`preset-cloud-workshop/`。它们统一采用 16:9 横图、左侧低信息区和右侧视觉
+焦点，覆盖深浅模式各五套。生成工具、日期与素材清单记录在 `NOTICE.md`。
 
-这四套主题不由 `generate-presets.mjs` 管理，重新生成程序化抽象预设不会
+这些主题不由 `generate-presets.mjs` 管理，重新生成程序化抽象预设不会
 覆盖其 `background.png`。
 
 ## 一套预设的结构

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-orbit-library",
+  "name": "星环书库",
+  "brandSubtitle": "CODEX DREAM SKIN",
+  "tagline": "星海、书架与黄铜仪器组成的静夜书房。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "DREAM SKIN ONLINE",
+  "quote": "READ THE UNWRITTEN",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.84,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#060b10",
+    "panel": "#101820",
+    "panelAlt": "#15242b",
+    "accent": "#5bb9c7",
+    "accentAlt": "#8ddce4",
+    "secondary": "#d5a85b",
+    "highlight": "#2e8197",
+    "text": "#edf6f7",
+    "muted": "#8ca0a7",
+    "line": "rgba(91, 185, 199, .27)"
+  }
+}
